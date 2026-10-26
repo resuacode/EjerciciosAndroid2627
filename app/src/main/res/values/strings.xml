@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">My Application</string>
+    <string name="android" translatable="false">Android</string>
+    <string name="world">World</string>
+    <string name="Hello">Hello</string>
+    <string name="contadores">Contadores</string>
+</resources>
