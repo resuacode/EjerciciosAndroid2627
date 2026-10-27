@@ -9,9 +9,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.math.sqrt
 
-enum class Operador {
-    SUMA, RESTA, MULT, DIV
+enum class Operador(val simbolo: String) {
+    SUMA("+"),
+    RESTA("-"),
+    MULT("*"),
+    DIV("/");
+
+    // Opcional: si quieres una función explícita en lugar de acceder a la propiedad
+    fun obtenerSimbolo(): String = simbolo
 }
+
 
 data class CalculadoraState(
     val memoria: Double = 0.0,
@@ -47,12 +54,14 @@ class CalculadoraViewModel : ViewModel() {
         }
     }
 
-    fun cambiarOperador(newOperador: Operador) {
-        _uiState.update { it.copy(
-            operador = newOperador,
-            memoria = it.textDisplay.toDouble(),
-            textDisplay = "0"
-        )
+    fun cambiarOperador(context: Context, newOperador: Operador) {
+        if(_uiState.value.memoria != 0.0 && newOperador == _uiState.value.operador) igual(context) else {
+            _uiState.update { it.copy(
+                operador = newOperador,
+                memoria = it.textDisplay.toDouble(),
+                textDisplay = "0"
+            )
+            }
         }
     }
 

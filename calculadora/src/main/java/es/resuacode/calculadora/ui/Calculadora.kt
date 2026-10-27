@@ -44,7 +44,11 @@ fun Calculadora(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DisplayCalculadora(uiState.textDisplay, Modifier.weight(3f))
+        DisplayCalculadora(
+            memoryText = uiState.memoria.toString() + (uiState.operador?.simbolo ?: ""),
+            displayText = uiState.textDisplay,
+            Modifier.weight(3f)
+        )
         Row(
             modifier = Modifier.fillMaxWidth().weight(1f)
         ) {
@@ -59,7 +63,7 @@ fun Calculadora(
             BotonCalculadora("⅟") { viewModel.fraccion()}
             BotonCalculadora("x²") {viewModel.cuadrado()}
             BotonCalculadora("√") { viewModel.raizCuadrada()}
-            BotonCalculadora("÷") { viewModel.cambiarOperador(Operador.DIV)}
+            BotonCalculadora("÷") { viewModel.cambiarOperador(context, Operador.DIV)}
         }
         Row(
             modifier = Modifier.fillMaxWidth().weight(1f)
@@ -73,7 +77,7 @@ fun Calculadora(
             BotonCalculadora("9", colorFondo = Fondo) {
                 viewModel.displayNum("9")
             }
-            BotonCalculadora("x") { viewModel.cambiarOperador(Operador.MULT)}
+            BotonCalculadora("x") { viewModel.cambiarOperador(context, Operador.MULT)}
         }
         Row(
             modifier = Modifier.fillMaxWidth().weight(1f)
@@ -89,7 +93,7 @@ fun Calculadora(
                 viewModel.displayNum("6")
 
             }
-            BotonCalculadora("-") { viewModel.cambiarOperador(Operador.RESTA)}
+            BotonCalculadora("-") { viewModel.cambiarOperador(context, Operador.RESTA)}
         }
         Row(
             modifier = Modifier.fillMaxWidth().weight(1f)
@@ -103,7 +107,7 @@ fun Calculadora(
             BotonCalculadora("3", colorFondo = Fondo) {
                 viewModel.displayNum("3")
             }
-            BotonCalculadora("+") { viewModel.cambiarOperador(Operador.SUMA)}
+            BotonCalculadora("+") { viewModel.cambiarOperador(context, Operador.SUMA)}
         }
         Row(
             modifier = Modifier.fillMaxWidth().weight(1f)
@@ -149,20 +153,38 @@ fun RowScope.BotonCalculadora(
 }
 
 @Composable
-fun DisplayCalculadora(displayText: String, modifier: Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Fondo)
-            .padding(20.dp),
-        contentAlignment = Alignment.BottomEnd
+fun DisplayCalculadora(memoryText: String, displayText: String, modifier: Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize()
     ) {
-        Text(
-            text = displayText,
-            textAlign = TextAlign.End,
-            color = ColorLetras,
-            fontSize = 50.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(Fondo)
+                .padding(10.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            Text(
+                text = memoryText,
+                textAlign = TextAlign.End,
+                color = ColorLetras,
+                fontSize = 25.sp,
+            )
+        }
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(Fondo)
+                .padding(20.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            Text(
+                text = displayText,
+                textAlign = TextAlign.End,
+                color = ColorLetras,
+                fontSize = 50.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }

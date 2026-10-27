@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/calculadora" />
             <option value="$PROJECT_DIR$/listas" />
             <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/todo" />
           </set>
         </option>
       </GradleProjectSettings>
