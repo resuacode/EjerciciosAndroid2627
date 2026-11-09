@@ -2,5 +2,5 @@ package es.resuacode.todo.data
 
 data class TodoItem (
     val tarea: String,
-    val completado: Boolean
+    var completado: Boolean = false
 )
