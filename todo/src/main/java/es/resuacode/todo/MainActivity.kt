@@ -5,16 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import es.resuacode.todo.ui.MainScreen
+import es.resuacode.todo.ui.MyApp
+import es.resuacode.todo.ui.screens.main.MainScreen
 import es.resuacode.todo.ui.theme.MyApplicationTheme
 import es.resuacode.todo.ui.utils.TodoTopAppBar
 
@@ -24,21 +21,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                Scaffold(
-                    topBar = { TodoTopAppBar() },
-                    floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = {}
-                        ) {
-                            Icon(painterResource(R.drawable.add_24px),
-                                contentDescription = "add icon")
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-                    MainScreen(innerPadding)
+                    MyApp()
                 }
             }
         }
     }
-}
